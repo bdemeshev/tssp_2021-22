@@ -172,19 +172,71 @@ Ilya wins if HTH appears and Zmei wins if TTH appears.
 
 Deadline: \textbf{2021-10-06, 21:00}. 
 
-\end{document}
 
 \section*{Home Assignment 2}
 
 
 \begin{enumerate}
-  \item 
+  \item I walk in the street during the first snow. Snowflakes falling into my palm 
+  is a Poisson process with rate $\lambda = 10$ snowflakes per minute.
+
+  \begin{enumerate}
+    \item What is the probability that there will be exactly 4 snowflakes in 30 seconds?
+    \item What is the expected value and variance of snowflakes in 2 minutes?
+  \end{enumerate}
+
   \item Grasshoppers are scattered accross a field according to a Poisson process with rate one grasshopper per two square meters. 
   
   Which area should I search to find at least one grasshopper with probability $0.9$?
+
+  \item Ilon Mask has two mobile phones. The calls to the first phone are a Poisson process 
+  with rate $\lambda_1$, the calls to the second one — a Poisson process with rate $\lambda_2$. 
+  Rate is measured in calls per hour. 
+  These processes are independent.
+
+  Ilon turns on the phones simulteneously. 
+  
+  \begin{enumerate}
+    \item What is the probability that he receives exactly 2 calls on the first phone and exactly 
+    3 calls on the second in one hour? Ilon Mask is like Bruce Willis and can answer unlimited 
+    number of calls simulteneously. 
+    \item What is covariance between the total number of calls in the first hour and the total 
+    number of calls in the first two hours?
+    \item (harder) What is the probability that the first phone will ring first?
+  \end{enumerate}
+  
+  Hint: there are at least two ways to solve the hard point. 
+  You can calculate a double integral 
+  for exponentially distributed waiting times. 
+  You can use the assumptions of Poisson process and first step approach.
+
+  \item I wait on the bus stop. The buses arrive according a Poisson process with rate 2 per hour. 
+  The taxis arrive according to a Poisson process with rate 5 per hour.  
+  
+  \begin{enumerate}
+    \item What is the probability that at least two taxis will arrive before a bus?
+    \item What is the probability that exactly two taxis will arrive before a bus?
+  \end{enumerate}
+  
+  Hint: in this problem you may use the following fact without a proof. For two independent exponentially 
+  distributed variables with rates $\lambda_1$ and $\lambda_2$: $\P(Y_1 < Y_2) = \lambda_1 / (\lambda_1 + \lambda_2)$.
+
+  \item (harder) Students arrive to the Grusha caffé according to a Poisson process with rate $\lambda$.
+  The service time are independent and exponentially distributed with rate $\mu > \lambda$.
+
+  Let's denote by $S_t$ the number of students in the queue at time $t$ (counting the student who is serviced).
+  Imagine that Grusha is open 24/24 and the arrivals and service go on and go on. 
+  The distribution of $S_t$ will stabilize, you don't need to prove it. 
+
+  Find the probability $\P(S_t = k)$ for big value of $t$. 
+
+
 \end{enumerate}
 
+Deadline: \textbf{2021-10-29, 21:00}. 
 
+
+\newpage
 
 \section*{Home Assignment 3}
 
@@ -223,7 +275,10 @@ Deadline: \textbf{2021-10-06, 21:00}.
 \end{enumerate}
 
 
-Deadline: 25 September 2020, 21:00 MSK.
+Deadline: \textbf{2021-11-06, 21:00}. 
+
+
+\end{document}
 
 
 \newpage
