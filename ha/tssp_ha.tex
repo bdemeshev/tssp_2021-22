@@ -281,6 +281,62 @@ Deadline: \textbf{2021-11-08, 21:00}.
 \end{document}
 
 
+
+\newpage
+
+\section*{Home Assignment 4}
+
+\begin{enumerate}
+  \item Consider three classes of random processes in discrete time:
+  \begin{itemize}
+    \item Markov chains, $\P(X_{n+1} = k \mid X_{n}, X_{n-1}, \ldots, X_1) = \P(X_{n+1} = k \mid X_{n})$ for all $n$.
+    \item Martingales, $\E(X_{n+1} \mid X_{n}, X_{n-1}, \ldots, X_1 ) = X_n$ for all $n$.
+    \item Stationary processes, $\E(X_n) = \mu$, $\Cov(X_n, X_{n-k}) = \gamma_k$ for all $n$ and $k$.
+  \end{itemize}
+
+  Provide an example of prove that the case is impossible.
+  \begin{enumerate}
+    \item The process $X_t$ is a Markov chain but not a martingale.
+    \item The process $X_t$ is a martingale but not stationary.
+    \item The process $X_t$ is a stationary martingale but not a Markov chain.
+  \end{enumerate}
+
+  \item Consider the Hedgehog problem from the exam. 
+  The Hedgehog starts at the state one and moves randomly between states with transition matrix
+  \[
+    P = \begin{pmatrix}
+      0.2 & 0.2 & 0 & 0.6 \\
+      0.3 & 0.3 & 0.4 & 0 \\
+      0 & 0 & 0.1 & 0.9 \\
+      0 & 0 & 0.8 & 0.2 \\
+    \end{pmatrix}.
+  \]
+
+  Let $p_1(t)$, $p_2(t)$, $p_3(t)$ and $p_4(t)$ be the probabilities of 
+  observing the Hedgehog in each of the four states after exactly $t$ moves. 
+
+  \begin{enumerate}
+    \item Draw these probabilities as the functions of $t$ using any open source software (Python, R, Julia, \ldots).
+    Provide your code.  
+    \item Is the number of steps equal to $10^{2021}$ sufficient for convergence?
+  \end{enumerate}
+  
+  \item Let $X_t$ be the Poisson process with rate $\lambda = 42$. 
+  \begin{enumerate}
+    \item Find a constant $\alpha$ such that $A_t = X_t - \alpha t$ is a martingale.
+    \item Find a constant $\beta$ such that $B_t = \exp(X_t - \beta t)$ is a martingale.
+  \end{enumerate}
+
+
+\end{enumerate}
+
+
+Deadline: \textbf{2021-11-08, 21:00}. 
+
+
+
+
+
 \newpage
 
 
