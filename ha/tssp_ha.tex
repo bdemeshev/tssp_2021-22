@@ -327,6 +327,23 @@ Deadline: \textbf{2021-11-08, 21:00}.
     \item Find a constant $\beta$ such that $B_t = \exp(X_t - \beta t)$ is a martingale.
   \end{enumerate}
 
+\item Ilon Mask draws cards one by one from a well-shuffled deck of 52 cards. 
+Let $X_i$ be the indicator that the $i$-th card is an Ace. 
+
+He remembers only whether each drawn card was an Ace or not, so 
+his filtration is $\mathcal F_n = \sigma(X_1, X_2, \ldots, X_n)$.
+
+Let $Y_n$ be his prediction whether the last card is an Ace $Y_n = \E(X_{52} \mid \mathcal F_n)$.
+
+\begin{enumerate}
+  \item Express $Y_n$ in terms of $X_1$, \ldots, $X_n$.
+  \item Is $Y_n$ a martingale?
+  \item Using any open source software draw 5 random trajectories of $Y_n$. 
+\end{enumerate}
+
+
+
+
 
 \end{enumerate}
 
