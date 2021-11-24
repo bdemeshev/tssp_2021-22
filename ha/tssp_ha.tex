@@ -1,3 +1,4 @@
+% arara: xelatex
 \documentclass[12pt]{article}
 
 \usepackage{physics}
@@ -357,6 +358,107 @@ Let $Y_n$ for $n \in \{0, 1, \ldots, 51\}$ be his probability estimate that the 
 
 
 Deadline: \textbf{2021-11-16, 21:00}. 
+
+
+
+
+
+\newpage
+
+\section*{Home Assignment 5}
+
+Hereinafter $(W_t)$ is a standard Wiener process.  
+
+\begin{enumerate}
+
+  
+  \item Some questions about Wiener process!
+  \begin{enumerate}
+    \item Find $\E(W_7 \mid W_5)$, $\Var(W_7\mid W_5)$, $\E(W_7 W_6 \mid W_5)$.
+    \item Find $\E(W_5 \mid W_7)$, $\Var(W_5\mid W_7)$.
+  \end{enumerate}
+  
+  \item Using Ito's lemma find $dX$ and the corresponding full form.
+  \begin{enumerate}
+    \item $X_t = W_t^6 \cos t$.
+    \item $X_t = Y_t^3 + t^2 Y_t$ where $dY_t = W_t^2 dW_t + tW_t dt$.
+  \end{enumerate}
+
+  \item Consider a standard Wiener process $(W_t)$.
+  \begin{enumerate}
+    \item Find the moment generating function of $W_t$, $M(u) = \E(\exp(u W_t))$.
+    \item Using the Taylor expansion for $M(u)$ find the $\E(W_t^k)$ for $k\in \mathbb N$.
+  \end{enumerate}
+
+  \item Consider two independent Wiener processes $A_t$ and $B_t$.
+  Check whether these processes are Wiener processes:
+  \begin{enumerate}
+    \item $X_t = (A_t + B_t) / 2$.
+    \item $Y_t = (A_t + B_t) / \sqrt{2}$.
+  \end{enumerate}
+
+  \item Consider $I_t = \int_0^t W_t^2 t^2 dt$. 
+  Find $\E(I_t)$, $\Var(I_t)$ and $\Cov(I_t, W_t)$.
+
+  \item (bonus) Let's split the time segment $[0;10]$ into $n=10^5$ sub-segments of equal lentgh. 
+ Let $\Delta_i$ be equal to the corresponding increment of Wiener process, 
+ $\Delta_i = W(10i/n) - W(10(i-1)/n)$. 
+  \begin{enumerate}
+    \item What is the distribution of $\Delta_i$?
+    \item Using any open source software simulate five approximate trajectories of Wiener process and plot them 
+    on the same plot. 
+    \item Now simulate $n_{sim} = 10^4$ trajectories but do not plot them. 
+    Using these trajectories estimate the probability $p = \P(\max_{t \in [0;10]}W_t > 7)$. 
+  \end{enumerate}
+  
+  Do not forget to provide your code. 
+
+  \item (bonus) Find the following limits in $L^2$.
+  \begin{enumerate}
+%    \item Non-stochastic one first:
+%    \[
+%      R_n = \sum_{i=1}^n \left(h(it/n) - h((i-1)t/n)\right)^2, \text{ where } h(u) = 3u^2.
+%    \]
+    \item 
+    \[
+    S_n = \sum_{i=1}^n (t/n)\left(W(it/n) - W((i-1)t/n)\right).
+    \]
+    \item 
+    \[
+      T_n = \sum_{i=1}^n \left(W(it/n) - W((i-1)t/n)\right)^3.
+    \]
+  
+  \end{enumerate}
+  
+
+\end{enumerate}
+
+
+Deadline: \textbf{2021-12-04, 21:00}. 
+
+
+
+
+
+
+\newpage
+
+\section*{Home Assignment 6}
+
+\begin{enumerate}
+
+\item The last one :)
+\item Will be added a little bit later.
+
+
+
+\end{enumerate}
+
+
+Deadline: \textbf{2021-12-12, 21:00}. 
+
+
+
 
 
 \end{document}
