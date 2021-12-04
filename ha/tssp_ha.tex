@@ -397,8 +397,8 @@ Hereinafter $(W_t)$ is a standard Wiener process.
     \item $Y_t = (A_t + B_t) / \sqrt{2}$.
   \end{enumerate}
 
-  \item Consider $I_t = \int_0^t W_t^2 t^2 dt$. 
-  Find $\E(I_t)$, $\Var(I_t)$ and $\Cov(I_t, W_t)$.
+  \item Consider $I_t = \int_0^t W_u^2 u^2 du$. 
+  Find $\E(I_t)$, $\Var(I_t)$ and (bonus) $\Cov(I_t, W_t)$.
 
   \item (bonus) Let's split the time segment $[0;10]$ into $n=10^5$ sub-segments of equal lentgh. 
  Let $\Delta_i$ be equal to the corresponding increment of Wiener process, 
@@ -446,10 +446,53 @@ Deadline: \textbf{2021-12-04, 21:00}.
 \section*{Home Assignment 6}
 
 \begin{enumerate}
+\item Let $X_t = 42 + t^2W_t^3 + tW_t^2 + \int_0^t 3W_u du + \int_0^t W_u^3 dW_u$.
+\begin{enumerate}
+  \item Find $dX_t$.
+  \item Is $X_t$ a martingale? Is $Y_t = X_t - \E(X_t)$ a martingale? 
+\end{enumerate}
 
-\item The last one :)
-\item Will be added a little bit later.
+Hint: only the binary answer for (b) is not sufficient but the argument is very-very short if you solve (a). 
 
+\item Consider $I_t = \int_0^t W_t^2 t^2 dW_t$. 
+
+\begin{enumerate}
+  \item Find $dI_t$, $\E(I_t)$, $\Var(I_t)$ and $\Cov(I_t, W_t)$.
+  \item Find $\E(I_5 \mid I_3)$.
+\end{enumerate}
+
+
+\item In the framework of Black and Scholes model find the price at $t=0$ of the following two 
+financial assets, $dS_t = \mu S_t dt + \sigma S_t dW_t$ is the share price equation. 
+\begin{enumerate}
+  \item The asset pays you at time $T$ exactly one dollar if $S_T < K$ where $K$ is a constant 
+  specified in the contract. 
+  \item The asset pays you at time $T$ exactly $S_T^2$ dollars.
+\end{enumerate}
+
+
+
+\item Consider the Vasicek interest rate model, 
+\[
+  dR_t=5(0.06 - R_t) \, dt + 3 \, dW_t, \quad R_0 = 0.07.
+\]
+Here $R_t$ is the interest rate and $a$, $b$ and $\sigma$ are positive constants.
+\begin{enumerate}
+\item Using the substitution $Y_t=e^{at} R_t$ find the solution of the stochastic differential equation.
+Start by finding $dY_t$.
+\item Find $\E(R_t)$ and $\Var(R_t)$.
+\item Which value in this model would you call long-term equilibrium rate and why?
+\end{enumerate}
+
+Hint: you may have integrals in you expression for $R_t$, but no $R_t$.
+
+\item Let $X_t$ be the exchange rate measured in roubles per dollar. 
+We suppose that $dX_t = \mu X_t dt + \sigma X_t dW_t$. 
+
+Consider the inverse exchange rate $Y_t = 1/X_t$ measured in dollars per rouble. 
+
+Write the stochastic differential equation for $dY_t$. 
+The equation may contain $Y_t$ and constants, but not $X_t$.
 
 
 \end{enumerate}
