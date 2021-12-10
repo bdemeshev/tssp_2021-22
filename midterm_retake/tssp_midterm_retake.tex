@@ -1,0 +1,210 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+\usepackage{physics}
+
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Time Series and Stochastic Processes}
+\chead{}
+\rhead{Midterm retake, 2021-12-06}
+\lfoot{2021-2022}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{english}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+%\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+%\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator{\pCorr}{\mathrm{p}\mathbb{C}\mathrm{orr}}
+
+
+\newcommand \hb{\hat{\beta}}
+\newcommand \hs{\hat{\sigma}}
+\newcommand \htheta{\hat{\theta}}
+\newcommand \s{\sigma}
+\newcommand \hy{\hat{y}}
+\newcommand \hY{\hat{Y}}
+\newcommand \e{\varepsilon}
+\newcommand \he{\hat{\e}}
+\newcommand \z{z}
+\newcommand \hVar{\widehat{\Var}}
+\newcommand \hCorr{\widehat{\Corr}}
+\newcommand \hCov{\widehat{\Cov}}
+\newcommand \cN{\mathcal{N}}
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cH}{\mathcal{H}}
+
+
+\begin{document}
+
+Short rules: 120 minutes, online without proctoring. You may use any source you want but don't cheat.
+\vspace{10pt}
+
+\textbf{Pledge:}
+\vspace{10pt}
+\begin{tcolorbox}
+Start exam by writing the following honor pledge and signing it.
+
+\vspace{10pt}
+
+I pledge on my honor that I will not give nor receive any 
+unauthorized assistance on this exam.
+\end{tcolorbox}
+\vspace{20pt}
+
+\textbf{Problems:}
+
+
+\begin{enumerate}
+
+\item (10 points) Consider the Markov chain with the transition matrix
+\[
+  P = \begin{pmatrix}
+    0.2 & 0.2 & 0 & 0.6 & 0 \\
+    0.3 & 0.3 & 0.4 & 0 & 0\\
+    0 & 0 & 0.3 & 0.7 & 0 \\
+    0 & 0 & 0.8 & 0.2 & 0 \\
+    0 & 0 & 0 & 0 & 1 \\
+  \end{pmatrix}.
+\]
+
+\begin{enumerate}
+  \item (3 points) Split the chain in classes and classify them into closed or not closed.
+  \item (2 points) Classify the states into recurrent or transient.
+  \item (5 points) A Hedgehog starts in the state one and moves 
+  randomly between states according to the transition matrix.
+
+  What is the approximate probability that the Hedgehog will be in the 
+  state four after $10^{2021}$ moves?
+\end{enumerate}
+
+Note: state number is the row (or column) number.
+
+  \item (10 points) Consider infinite ladder with steps numbered from $0$ to infinity. 
+  I start at step $0$. Every day with probability $u$ I go one step up.
+  With probability $d$ I go one step down. With probability $1-u-d$ I stay on the same step.
+
+  If I am at step $0$ then I stay there with probability $1-u$ because it's impossible to go down. 
+
+  Consider the case $d>u$. 
+  
+  What is the probability that I will be at step $0$ after $10^{1000}$ days?
+
+  \item (10 points) The random variables $X_i$ are independend and uniformly distributed on $[0;2]$.
+  Find the probability limit
+\[
+\plim_{n\to\infty}  \max \left\{ \frac{\sum_{i=1}^{10} X_i}{n}, \frac{\sum_{i=1}^n X^3_i}{n+1} \right\}.
+\]
+
+
+\item (10 points) Taxis arrive to the station according to the Poisson process with rate 1 per 5 minutes. 
+
+Let $Y_t$ be the number of taxis that will arrive between 0 and $t$ minutes.
+
+\begin{enumerate}
+  \item (5 points) Sketch the probability $\P(Y_{t+3} = 1 \mid Y_t = 0)$ as a function of $t$.
+  \item (5 points) Sketch the covariance $\Cov(Y_t, Y_{60})$ as a function of $t$.
+\end{enumerate}
+
+Note: special points like intercepts or extrema should be explicitely marked.
+
+\newpage 
+\item (10 points) The moment generating function of a random variable $X$ is $1/(1-2t)$.
+\begin{enumerate}
+    \item Find the moment generating function of $2X$.
+    \item Find the moment generating function of $X + Y$ where $X$ and $Y$ are independent and identically distributed.
+    \item Do you remember the sum of geometric progression? Find $\E(X^{2021})$.
+\end{enumerate}
+
+\item (20 points) Variables $X_1$, $X_2$, \ldots $X_{100}$ are independent and identically distributed
+with mean $1$ and variance $2$. Each $X_i$ has only three possible values: 0, 1, and 2. 
+
+\begin{enumerate}
+  \item (5 points) How many events are in sigma-algebras $\sigma(X_1, X_2)$ and $\sigma(X_1 - X_2)$?
+  \item (5 points) If possible provide an example of events $A$ and $B$ such that: $A\in \sigma(X_1, X_2)$ but $A\not\in\sigma(X_1 - X_2)$; $B\in \sigma(X_1 - X_2)$ but $B\not\in\sigma(X_1, X_2)$.
+  \item (10 points) Find $\E(X_1 + \ldots + X_{100} \mid X_1 + \ldots + X_{50})$ and $\E(X_1 + \ldots + X_{50} \mid X_1 + \ldots + X_{100})$.
+\end{enumerate}
+
+
+
+
+
+
+\end{enumerate}
+
+
+\end{document}
+
