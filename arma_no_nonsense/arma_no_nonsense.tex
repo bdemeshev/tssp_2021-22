@@ -1,0 +1,308 @@
+% arara: xelatex
+\documentclass[12pt]{article} % размер шрифта
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{url} % для вставки ссылок \url{...}
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering} % приказываем центрировать все sections
+
+\usepackage{amsthm} % теоремы и доказательства
+
+\usepackage{physics}
+
+\usepackage{amsmath, amssymb} % куча стандартных математических плюшек
+
+\usepackage[top=2cm, left=1.5cm, right=1.5cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption} % подписи к картинкам без плавающего окружения figure
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{ARMA: no nonsense notes}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет картина Последний день Помпеи}
+% команда \listoftodos — печатает все поставленные \todo'шки
+
+\usepackage{booktabs} % красивые таблицы
+% заповеди из документации:
+% 1. Не используйте вертикальные линии
+% 2. Не используйте двойные линии
+% 3. Единицы измерения помещайте в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+\usepackage{fontspec} % поддержка разных шрифтов
+\usepackage{polyglossia} % поддержка разных языков
+
+\setmainlanguage{english}
+% \setotherlanguages{russian}
+
+\setmainfont{Linux Libertine O} % выбираем шрифт
+% если Linux Libertine не установлен, то
+% можно также попробовать Helvetica, Arial, Cambria и т.Д.
+
+% чтобы использовать шрифт Linux Libertine на личном компе,
+% его надо предварительно скачать по ссылке
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+
+% на сервисах типа sharelatex.com этот шрифт есть :)
+
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+% пояснение зачем нужно шаманство с \newfontfamily
+% http://tex.stackexchange.com/questions/91507/
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+%\setlist[enumerate, 2]{label=\asbuk\cdot),ref=\asbuk\cdot} % списки уровня 2 будут буквами а) б) ...
+
+%% эконометрические и вероятностные сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+\def \RR{\mathbb{R}}
+\def \ZZ{\mathbb{Z}}
+
+
+\usepackage{thmtools} % тонкая настройка окружения теорем
+
+% окружения!
+\declaretheorem[
+style=definition,
+title=Теорема,
+numberwithin=,
+]{theorem}
+
+
+% опция sibling=theorem посередине даёт сквозную нумерацию с теоремами
+\declaretheorem[
+style=definition,
+title=Definition,
+sibling=theorem,
+qed={}
+]{definition}
+
+
+
+
+
+
+\begin{document}
+
+Short introduction to ARMA procesess without nonsense. 
+The goal is to state all the theorems rigorously. 
+
+\begin{definition}
+The process $(u_t)$ is called white noise if 
+\[
+\E(u_t) = 0, \quad \Var(u_t) = \sigma^2, \quad \Cov(u_s, u_t) = 0 \text{ for } s\neq t.    
+\]
+\end{definition}
+
+This definition does not assume that $u_t$ and $u_s$ are independent. 
+They may be dependent but uncorrelated. 
+
+This definition does not assume normality of $u_t$ but normality of white noise 
+is often assumed in maximum likelihood estimation. 
+
+\begin{definition}
+    Lag operator $L$ transforms a stochastic process $(y_t)$ with $t\in \ZZ$ into a 
+    new stochastic process by shifting the index back in time,
+    \[
+            L y_t = y_{t-1}.
+    \]
+\end{definition}
+
+\begin{definition}
+    Forward operator $F$ transforms a stochastic process $(y_t)$ with $t\in \ZZ$ into a 
+    new stochastic process by shifting the index forward in time,
+    \[
+            L y_t = y_{t+1}.
+    \]
+\end{definition}
+
+
+Simple arithmetic examples are:
+\[
+(1 + 2L + 3L^2)y_t = y_t + 2y_{t-1} + 3y_{t-2},   
+\]
+\[
+(3 + 2F + 5F^2)y_t = 3y_t + 2y_{t+1} + 5y_{t+2},
+\]
+
+\begin{theorem}
+    The operators $L$ and $F$ are linear and $L^{-1} = F$.
+\end{theorem}
+
+\begin{proof}
+ The action $LF$ or $FL$ does nothing with any process $(y_t)$. 
+ So operators $L$ and $F$ are mutually inverse.
+\end{proof}
+
+
+\begin{definition}
+    The process $(y_t)$ is called stationary in weak sense if 
+    \[
+    \E(y_t) = \mu, \quad \Cov(u_s, u_t) = \gamma(t - s).    
+    \]
+\end{definition}
+
+In particular all variances of stationary process are equal, $\Var(y_t) = \Cov(y_t, y_t) = \gamma_0$.
+
+
+
+When infinite sums do exist?
+
+
+
+
+
+We \textit{define} division by monomials.
+
+
+
+\begin{definition}
+    For $\abs{\alpha} < 1$ we define
+    \[
+    \frac{1}{1 - \alpha L} y_t = (1 + \alpha L + \alpha^2 L^2 +\alpha^3 L^3 + \ldots )y_t,    
+    \]
+    and 
+    \[
+    \frac{1}{1 - \alpha F} y_t = (1 + \alpha F + \alpha^2 F^2 +\alpha^3 F^3 + \ldots )y_t.    
+    \]
+\end{definition}
+
+
+\begin{theorem}
+    If $(u_t)$ is a white noise and $\abs{\alpha} < 1$ then 
+    $\frac{1- \alpha L}{1 - \alpha F} u_t$ and $\frac{1- \alpha F}{1 - \alpha L} u_t$ are white noises. 
+\end{theorem}
+
+
+
+\begin{theorem}
+    The equation 
+    \[
+    P(L) y_t = Q(L)u_t + c,    
+    \]
+    where $(u_t)$ is a white noise 
+    has infinitely many non-stationary solutions $(y_t)$ if degree of $P$ is higher than one. 
+\end{theorem}
+
+\begin{theorem}
+Consider the equation 
+\[
+    P(L) y_t = Q(L)u_t + c.
+\]
+If polynomials $P$ and $Q$ are coprime then 
+\begin{enumerate}
+    \item There are no stationary solutions $(y_t)$ at all if $P$ has at least one root $\ell$ with $\abs{\ell} = 1$.
+    \item There is exactly one stationary solution $(y_t)$ if all roots $\ell$ of $P$ have $\abs{\ell} \neq 1$.
+\end{enumerate}
+
+There are two subcases when all roots $\ell$ of $P$ have $\abs{\ell} \neq 1$:
+\begin{enumerate}
+    \item All roots $\ell$ of $P$ have $\abs{\ell} > 1$.
+    In this case the unique stationary solution has the form 
+    \[
+        y_t = \mu + u_t + c_1 u_{t-1} + c_2 u_{t-2} + c_3 u_{t-3} + \ldots,
+    \]
+    where $(u_t)$ is the white noise from original equation. 
+    \item At least one root of $P$ has $\abs{\ell} <1$.
+    In this case the unique stationary solution has the form 
+    \[
+        y_t = \mu + \nu_t + c_1 \nu_{t-1} + c_2 \nu_{t-2} + c_3 \nu_{t-3} + \ldots,
+    \]
+    where $(\nu_t)$ is a white noise different from $(u_t)$.
+
+\end{enumerate}
+
+\end{theorem}
+
+
+
+
+
+
+
+
+\begin{definition}
+    The process $(y_t)$ is called $ARMA(p, q)$ process with equation  
+    \[
+    P(L) y_t = Q(L) u_t + c,    
+    \]
+    if 
+    \begin{enumerate}
+        \item the process $(y_t)$ satisfies this equation;
+        \item polynomial $P(L)$ has degree $p$ and polynomial $Q(L)$ has degree $q$;
+        \item $P(0) = Q(0) = 1$;
+        \item $P$ and $Q$ are coprime, in other words they have no common roots. 
+        \item the process $(y_t)$ can be represented in $MA(\infty)$ form with respect to $(u_t)$:
+        \[
+            y_t = \mu + u_t + c_1 u_{t-1} + c_2 u_{t-2} + c_3 u_{t-3} + \ldots
+        \]
+    \end{enumerate}
+\end{definition}
+
+
+From the last requirement in this definition it \textit{follows} that all $ARMA(p,q)$ processes are 
+stationary. By definition. Point. 
+
+Not all solutions of equation $P(L) y_t = Q(L) u_t + c$ are called $ARMA$ processes. 
+
+
+
+\begin{definition}
+    The \textit{equation}
+    \[
+    P(L) y_t = Q(L) u_t + c,    
+    \]
+    is called \textit{invertible} if all roots $\ell$ of $Q$ have $\abs{\ell} > 1$.
+\end{definition}
+
+Stationarity is the property of a process, invertibility is the property of an equation. 
+One cannot check whether a given sequence of random variables is invertible. 
+Even more. 
+
+
+
+
+
+
+\end{document}
