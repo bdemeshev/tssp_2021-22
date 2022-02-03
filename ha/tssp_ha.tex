@@ -503,6 +503,248 @@ Deadline: \textbf{2021-12-12, 21:00}.
 
 
 
+\newpage
+
+Nine home assignments till the end of the course, three every month.
+You may receive 10/10 for each home assignment without bonus problems.
+
+And your have three more honey days :) Stay safe, be happy!
+
+\section*{Home Assignment 7: stationarity, white noise, simple models}
+\begin{enumerate}
+  \item The process $(u_t)$ is a white noise. 
+  Consider four processes: $a_t = (1+L)^3 u_t$, $b_t = \frac{1}{1-0.3 L}u_t$, $c_t = \frac{1 - 0.3F}{1-0.3L}u_t$, $d_t = \frac{1 - 0.4F}{1-0.3L}u_t$.
+  
+  \begin{enumerate}
+    \item Write explicit expression of these processes without lag $L$ nor forward $F$ operators.
+    \item Check whether these processes are stationary.
+    \item Check whether these processes are white noises.
+  \end{enumerate}
+
+  \item The process $(y_t)$ is stationary. Check whether these processes are stationary:
+  \begin{enumerate}
+  \item $a_{t}=\Delta^2 y_{t}$;
+  \item $b_{t}=4y_{t} - 3 y_{t-1} + 18$.
+  \item $c_t = 3 + t y_t$.
+  \end{enumerate}
+
+  \item Sasha and Masha have five observations: $y_1 = 5$, $y_2 = 4$, $y_3 = 7$, $y_4 = 9$, $y_5 = 8$.
+  
+  Masha assumes the model $y_t = \mu + u_t$, $u_t \sim \cN(0;\sigma^2)$ and independent. 
+
+  Sasha assumes the model $y_t = \mu + y_{t-1} + u_t$, $u_t \sim \cN(0;\sigma^2)$ and independent. 
+
+  \begin{enumerate}
+    \item Estimate the parameters of Masha's model using unconditional maximum likelihood, 
+    \[
+      \ln f(y_1, \ldots, y_5) \to \max.
+    \]
+    \item Estimate the parameters of Sasha's model using conditional maximum likelihood, 
+    \[
+      \ln f(y_2, \ldots, y_5 \mid y_1) \to \max.
+    \]
+  \end{enumerate}
+
+  \item Let $(y_t)$ be a stationary process with autocovariance function $\gamma_k = 20 \cdot 0.5^k$ and expected value $100$. 
+  You remove all odd observations and hence your have a new process $z_t = y_{2t}$. 
+
+  \begin{enumerate}
+    \item Is the new process $(z_t)$ stationary?
+    \item Draw the autocorrelation function of $(z_t)$ if it is stationary. 
+  \end{enumerate}
+
+  \item Provide an example of two dependent processes $(a_t)$ and $(b_t)$ such that each of them is stationary, 
+  but their sum is not stationary. 
+
+  \item (bonus) Variables $u_1$ and $u_2$ are independent $\cN(0;1)$. 
+  Consider the process $y_t = u_1 \cos (\pi t /2) + u_2 \sin (\pi t /2)$.
+
+  \begin{enumerate}
+    \item Is $(y_t)$ stationary? Is it a white noise process?
+    \item Your know that $y_{100} = 0.2022$. What is your prediction for $y_{104}$? What about predictive interval?
+  \end{enumerate}
+  
+\end{enumerate}
+
+Deadline: \textbf{2022-02-12, 21:00}. 
+
+
+\newpage
+
+\section*{Home Assignment 8: ACF and PACF and forecasting}
+\begin{enumerate}
+  \item  A dice is thrown three times, let's denote the results by $X_1$, $X_2$ and $X_3$. 
+Consider three sums $L=X_1+X_2$, $R=X_2+X_3$ and $S=X_1+X_2+X_3$.
+\begin{enumerate}
+\item Using common sense find the sign of these partial correlations\footnote{$\pCorr(X, Y; Z)$ denotes partial correlation between $X$ and $Y$ with «fixed» $Z$.}
+$\pCorr(L, R; S)$,
+  $\pCorr(L, S; R)$,  $\pCorr(X_1, R; S)$. 
+%   Буквально одной-двумя фразами аргументируйте знак каждой частной корреляции.
+  \item Calculate these partial correlations.
+\end{enumerate}
+
+
+  \item For $MA(2)$ process $y_t = 5 + u_t + 3u_{t-2}$ find all values of the autocorrelation function $\rho_k$ and 
+  first two values of the partial autocorrelation function $\phi_{kk}$.
+
+  \item For stationary $AR(1)$ process with equation $y_t = 5 + 0.3y_{t-1} + u_t$ find all values of the autocorrelation function $\rho_k$ and 
+  all values of the partial autocorrelation function $\phi_{kk}$.
+
+  \item For stationary $AR(2)$ process with equation $y_t = 5 + 0.3y_{t-1} - 0.02 y_{t-2} + u_t$ find first two values of the autocorrelation function $\rho_k$ and 
+  all values of the partial autocorrelation function $\phi_{kk}$.
+
+  \item Consider stationary $AR(2)$ model, $y_t = 2 + 0.3 y_{t-1} - 0.02 y_{t-2} + u_t$, where $(u_t)$ is a white noise
+    with normal distribution and $\Var(u_t) = 4$.
+    
+  The last two observations are $y_{100} = 2$, $y_{99} = 1$.
+ 
+  Find 95\% predictive interval for $y_{101}$ and $y_{102}$.
+ 
+  \item (bonus) Consider $MA(1)$ process $y_t = u_t + 3 u_{t-1} + 7$, 
+  where $u_t \sim \cN(0;16)$ and independent. You know that $y_{100} = 6$.
+
+  Find 95\% predictive interval for $y_{101}$ and $y_{102}$.
+
+\end{enumerate}
+
+Deadline: \textbf{2022-02-19, 21:00}. 
+
+\newpage
+
+\section*{Home Assignment 9: ETS\footnote{You can find all the equations in \url{https://otexts.com/fpp3/ets.html}}.}
+\begin{enumerate}
+  \item  Consider $ETS(AA_dN)$ model with $\phi = 0.9$, $\alpha=0.3$, $\beta=0.1$ and $\sigma^2=16$. 
+  Express 95\% predictive intervals for $y_{t+1}$ and $y_{t+2}$ in terms of $\ell_t$, $b_t$, $y_t$ and $u_t$. 
+  \item Find $\E(y_t)$, $\Var(y_t)$, $\Cov(y_t, y_{t+1})$ in the $ETS(AAN)$ model with given $\ell_0$, $b_0$, $\alpha$, $\beta$ and $\sigma^2$.
+  
+  \item Consider $ETS(AAN)$ model with $\ell_0 = 10$, $b_0 = 3$, $\alpha = \beta = 0.1$. 
+  Given observed values $y_1 = 15$, $y_2 = 17$, $y_3 = 20$ reconstruct the corresponding $\ell_t$, $b_t$ and $u_t$.
+
+  \item The semi-annual $y_t$ is modelled by $ETS(AAA)$ process:
+    
+  \[
+  \begin{cases}
+      u_t \sim \cN(0; 4) \\
+      s_t = s_{t-2} + 0.1 u_t \\
+      b_t = b_{t-1} + 0.2 u_t \\
+      \ell_t = \ell_{t-1} + b_{t-1} + 0.3 u_t \\
+      y_t = \ell_{t-1} + b_{t-1} + s_{t-2} + u_t \\
+  \end{cases}    
+  \]
+
+  Given that $s_{100} = 2$, $s_{99} = -1.9$, $b_{100} = 0.5$, $\ell_{100} = 4$ find 95\% prёdictive interval for $y_{102}$. 
+
+  \item How many free parameters are estimated in $ETS(ANA)$, $ETS(AAdA)$, $ETS(MMM)$ models for monthly time series?
+  Explicitely list all free parameters in each case. 
+
+  \item (bonus) Consider $y_t$ described by $ETS(MMM)$ model.
+  Is it true that $z_t = \ln y_t$ is exactly described by $ETS(AAA)$ model? Approximately?
+
+
+
+\end{enumerate}
+
+Deadline: \textbf{2022-02-26, 21:00}. 
+
+
+\newpage
+
+\section*{Home Assignment 10: recurrence equations and solutions}
+
+\begin{enumerate}
+  \item Consider the equation $y_t = 0.8 y_{t-1} -0.12 y_{t-2} + u_t + 2 u_{t-1}$, where $(u_t)$ is a white noise.
+  \begin{enumerate}
+    \item Write the lag polynomials of $AR$ and $MA$ part. Write the corresponding characterestic polynomials.
+    \item Do lag polynomials of $AR$ and $MA$ part have common roots?
+  \end{enumerate}
+  \item Consider the equation $y_t = 0.8 y_{t-1} -0.12 y_{t-2} + u_t + 2 u_{t-1}$, where $(u_t)$ is a white noise.
+  \begin{enumerate}
+    \item How many non-stationary solutions are there? Provide at least two set of initial values for non-stationary solution.
+    \item How many stationary solutions are there? 
+    \item Find constants $\mu$, $c_1$ and $c_2$ for the stationary solution of the form 
+    \[
+    y_t = \mu + u_t + c_1 u_{t-1} + c_2 u_{t-2} + \ldots  
+    \]
+  \end{enumerate}
+  \item Find all stationary solutions of the equation $y_t = -5 + 0.7 y_t + u_t - 0.5 u_t$, where $(u_t)$ is a white noise.
+  Are there any stationary solutions that are $MA(\infty)$ with respect to $u_t$?
+    \item Find the simplest recurrence equation on $y_t$ and $u_t$ with solution 
+  \[
+  y_t = 5 + u_t - 0.1u_{t-1} + 0.1^2 u_{t-2} - 0.1^3 u_{t-3} + 0.1^4 u_{t-4} + \ldots   
+  \]
+  \item Consider three equations $a_t = u_t + 2u_{t-2} + 3u_{t-2}$, $b_t = 4b_{t-1} - 4.5b_{t-2} + u_t$, 
+  $c_t = c_{t-1} - 0.3c_{t-2} + u_t + 0.7 u_{t-1}$, where $(u_t)$ is a white noise. 
+  \begin{enumerate}
+    \item Check whether the equation has any stationary solution. 
+    \item Check whether the equation has any stationary solution that is $MA(\infty)$ with respect to $u_t$.
+  \end{enumerate} 
+  
+  \item (bonus) Consider the equation $y_t = -5 + 2 y_{t-1} + u_t$, where $(u_t)$ is a white noise.
+  \begin{enumerate}
+    \item Find all stationary solutions of this equation. 
+    \item Provide an example of a process $(z_t)$ that is $MA(\infty)$ with respect to $(u_t)$ and 
+    has exactly the same autocorrelation function as the stationary solution $(y_t)$.
+  \end{enumerate}
+  
+
+Deadline: \textbf{2022-03-12, 21:00}. 
+
+
+
+\end{enumerate}
+
+
+\newpage
+
+\section*{Home Assignment 11}
+\begin{enumerate}
+  \item 
+\end{enumerate}
+
+Deadline: \textbf{2022-03-19, 21:00}. 
+
+\newpage
+
+\section*{Home Assignment 12}
+
+\begin{enumerate}
+  \item 
+\end{enumerate}
+
+Deadline: \textbf{2022-03-26, 21:00}. 
+
+
+\newpage
+
+\section*{Home Assignment 13}
+
+\begin{enumerate}
+  \item 
+\end{enumerate}
+
+Deadline: \textbf{2022-04-09, 21:00}. 
+
+\newpage
+
+\section*{Home Assignment 14}
+
+\begin{enumerate}
+  \item 
+\end{enumerate}
+
+Deadline: \textbf{2022-04-16, 21:00}. 
+
+\newpage
+
+\section*{Home Assignment 15}
+
+\begin{enumerate}
+  \item 
+\end{enumerate}
+
+Deadline: \textbf{2022-04-23, 21:00}. 
+
+
 
 \end{document}
 
