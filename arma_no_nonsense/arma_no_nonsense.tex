@@ -283,22 +283,33 @@ There are two subcases when all roots $\ell$ of $P$ have $\abs{\ell} \neq 1$:
 
 From the last requirement in this definition it \textit{follows} that all $ARMA(p,q)$ processes are 
 stationary. By definition. Point. 
-
+The equation $P(L) y_t = Q(L) u_t + c$ has infinitely many non stationary solutions. 
 Not all solutions of equation $P(L) y_t = Q(L) u_t + c$ are called $ARMA$ processes. 
+The same process $y_t$ can have \textit{many} $ARMA(p, q)$ representations with the same $AR$ part and 
+different $MA$ parts. 
 
 
 
 \begin{definition}
-    The \textit{equation}
+    The $ARMA(p, q)$ process with equation \textit{equation}
     \[
     P(L) y_t = Q(L) u_t + c,    
     \]
-    is called \textit{invertible} if all roots $\ell$ of $Q$ have $\abs{\ell} > 1$.
+    is called \textit{invertible} if white noise values can be recovered from past observed $(y_t)$ in a linear form,
+    \[
+       u_t = b + y_t + d_1 y_{t-1} + d_2 y_{t-2} + d_3 y_{t-3} + \ldots      
+    \]
 \end{definition}
 
-Stationarity is the property of a process, invertibility is the property of an equation. 
+
+Stationarity is the property of the process per se, invertibility is the property of \textit{the process and the equation}. 
 One cannot check whether a given sequence of random variables is invertible. 
-Even more. 
+
+
+
+\begin{theorem}
+Any $ARMA(p, q)$ process has at most one invertible equation.
+\end{theorem}
 
 
 
