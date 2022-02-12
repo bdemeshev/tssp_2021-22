@@ -119,6 +119,14 @@ qed={}
 ]{definition}
 
 
+% опция sibling=theorem посередине даёт сквозную нумерацию с теоремами
+\declaretheorem[
+style=definition,
+title=Example,
+sibling=theorem,
+qed={}
+]{example}
+
 
 
 
@@ -153,7 +161,7 @@ is often assumed in maximum likelihood estimation.
     Forward operator $F$ transforms a stochastic process $(y_t)$ with $t\in \ZZ$ into a 
     new stochastic process by shifting the index forward in time,
     \[
-            L y_t = y_{t+1}.
+            F y_t = y_{t+1}.
     \]
 \end{definition}
 
@@ -190,6 +198,7 @@ In particular all variances of stationary process are equal, $\Var(y_t) = \Cov(y
 When infinite sums do exist?
 
 
+...
 
 
 
@@ -217,7 +226,7 @@ We \textit{define} division by monomials.
 
 
 \begin{theorem}
-    The equation 
+    The equation for $(y_t)$
     \[
     P(L) y_t = Q(L)u_t + c,    
     \]
@@ -225,11 +234,12 @@ We \textit{define} division by monomials.
     has infinitely many non-stationary solutions $(y_t)$ if degree of $P$ is higher than one. 
 \end{theorem}
 
-\begin{theorem}
-Consider the equation 
+\begin{theorem} \label{thm:solutionstructure}
+Consider the equation for $(y_t)$
 \[
-    P(L) y_t = Q(L)u_t + c.
+    P(L) y_t = Q(L)u_t + c,
 \]
+where $(u_t)$ is a white noise.
 If polynomials $P$ and $Q$ are coprime then 
 \begin{enumerate}
     \item There are no stationary solutions $(y_t)$ at all if $P$ has at least one root $\ell$ with $\abs{\ell} = 1$.
@@ -282,16 +292,52 @@ There are two subcases when all roots $\ell$ of $P$ have $\abs{\ell} \neq 1$:
 
 
 From the last requirement in this definition it \textit{follows} that all $ARMA(p,q)$ processes are 
-stationary. By definition. Point. 
+stationary. By definition. Point. By the theorem \ref{thm:solutionstructure} the polynomial $P$ has all roots with $\abs{\ell} > 1$.
 The equation $P(L) y_t = Q(L) u_t + c$ has infinitely many non stationary solutions. 
 Not all solutions of equation $P(L) y_t = Q(L) u_t + c$ are called $ARMA$ processes. 
 The same process $y_t$ can have \textit{many} $ARMA(p, q)$ representations with the same $AR$ part and 
 different $MA$ parts. 
 
+In these examples $(u_t)$ is a white noise. 
+
+\begin{enumerate}
+    \item Equation $y_t = 5 + y_{t-1} + u_t$.
+    This equation has no stationary solutions at all. 
+    This equation has infinite number of non-stationary solution. 
+
+    Polynomials $P$ and $Q$ are coprime, unit root in the polynomial $P$. 
+    We do not use this equation to describe $ARMA$ process. 
+
+    \item Equation $y_t = y_{t-1} + u_t - u_{t-1}$.
+    This equation has infinite number of stationary solutions. For example $y_t = u_t + 5$.
+    This equation has infinite number of non-stationary solution. 
+    
+    Polynomials $P$ and $Q$ are not coprime, unit root in both polynomials $P$ and $Q$.
+    We do not use this equation to describe $ARMA$ process. 
+
+    \item Equation $y_t = 5 + 2 y_{t-1} + u_t - u_{t-1}$.
+    This equation has unique stationary solution. 
+    This equation has infinite number of non-stationary solution. 
+    
+    Polynomials $P$ and $Q$ are coprime, not all roots of $P$ are outside unit circle. 
+
+    We do not use this equation to describe $ARMA$ process. 
+
+    \item Equation $y_t = 7 + 0.5 y_{t-1} + u_t - u_{t-1}$.
+    This equation has unique stationary solution. 
+    This equation has infinite number of non-stationary solution. 
+    
+    Polynomials $P$ and $Q$ are coprime, all roots of $P$ are outside unit circle. 
+
+    The stationary solution of this equation is called $ARMA(1, 1)$ process with equation $y_t = 0.5 y_{t-1} + u_t - u_{t-1}$.
+
+
+\end{enumerate}
+
 
 
 \begin{definition}
-    The $ARMA(p, q)$ process with equation \textit{equation}
+    The $ARMA(p, q)$ process with \textit{equation}
     \[
     P(L) y_t = Q(L) u_t + c,    
     \]
@@ -306,10 +352,36 @@ Stationarity is the property of the process per se, invertibility is the propert
 One cannot check whether a given sequence of random variables is invertible. 
 
 
+\begin{example}
+Consider two white noise processes $(u_t)$ and $(v_t)$ linked by equation $(1 - 2L) u_t = (1 - 0.5 L)v_t$.
+This equation may be solved to obtain $u_t = \frac{1-0.5L}{1-0.5F} \frac{F}{-2} v_t$, that shows that the two white 
+noises do exist. 
+
+Now consider the process $y_t = (1 - 2L) u_t = (1 - 0.5 L)v_t$.
+
+Is $(y_t)$ invertible? This question is meaningless. 
+
+The process $(y_t)$ described by equation $y_t = u_t - 2u_{t-1}$ is not invertible. 
+
+The same process $(y_t)$ described by equation $y_t = v_t - 0.5v_{t-1}$ is invertible. 
+\end{example}
+
+
+
 
 \begin{theorem}
 Any $ARMA(p, q)$ process has at most one invertible equation.
 \end{theorem}
+
+\begin{theorem}
+    The $ARMA(p, q)$ process with \textit{equation}
+    \[
+    P(L) y_t = Q(L) u_t + c,    
+    \]
+    is \textit{invertible} if and only if all roots $\ell$ of $P$ have $\abs{\ell} > 1$.
+\end{theorem}
+
+By our definition of $ARMA$ process, it is stationary, polynomials $P$ and $Q$ are coprime and $P$ has all roots with $\abs{\ell} > 1$.
 
 
 
