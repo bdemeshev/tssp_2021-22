@@ -1,0 +1,221 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+\usepackage{physics}
+
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Time Series and Stochastic Processes}
+\chead{DON'T PANIC}
+\rhead{April Exam, 2022-04-04}
+\lfoot{2021-2022}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{english}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+%\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+%\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator{\pCorr}{\mathrm{p}\mathbb{C}\mathrm{orr}}
+
+
+\newcommand \hb{\hat{\beta}}
+\newcommand \hs{\hat{\sigma}}
+\newcommand \htheta{\hat{\theta}}
+\newcommand \s{\sigma}
+\newcommand \hy{\hat{y}}
+\newcommand \hY{\hat{Y}}
+\newcommand \e{\varepsilon}
+\newcommand \he{\hat{\e}}
+\newcommand \z{z}
+\newcommand \hVar{\widehat{\Var}}
+\newcommand \hCorr{\widehat{\Corr}}
+\newcommand \hCov{\widehat{\Cov}}
+\newcommand \cN{\mathcal{N}}
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cH}{\mathcal{H}}
+
+
+\begin{document}
+
+Short rules: 120 minutes, one A4 cheat sheet allowed. 
+
+% \textbf{Start exam by writing the following honor pledge and signing it.}
+% \vspace{10pt}
+% \begin{tcolorbox}
+% I pledge on my honor that I will not give nor receive any 
+% unauthorized assistance on this exam.
+% \end{tcolorbox}
+% \vspace{20pt}
+
+% \textbf{Problems:}
+
+\begin{enumerate}
+
+\item Consider $ETS(AAN)$ model,
+	$
+	\begin{cases}
+	y_t = \ell_{t-1} + b_{t-1} + u_t \\
+	\ell_t = \ell_{t-1} + b_{t-1} + \alpha u_t \\
+	b_t = b_{t-1} + \beta u_t \\
+	u_t \sim \cN(0;\sigma^2). \\
+	% s_t = s_{t-12} + \gamma \varepsilon_t \\
+	\end{cases}
+	$
+		
+Let $\ell_{100} = 50$, $b_{100} = 2$, $\alpha=0.4$, $\beta=0.5$, $\sigma^2 = 16$.
+
+Calculate one step and two steps ahead 95\% predictive intervals. 
+
+\item Consider the process $y_t = 4 + u_t + u_{t-1} + 2 u_{t-2}$, where $(u_t)$ is a white noise with variance $16$.
+
+\begin{enumerate}
+	\item Is this process stationary? Explain. 
+	\item Find the autocorrelation function of this process. Explain the meaning of $\rho_2$.
+	\item Consider the process $d_t = \Delta y_t$. Is it $ARIMA(p, d, q)$? If yes, then find $p$, $d$ and $q$.
+\end{enumerate}
+
+\item Consider the stationary $AR(2)$ process $y_t = 5 - 0.9y_{t-1} - 0.2y_{t-2} + u_t$, where $(u_t)$ is a white noise. 
+\begin{enumerate}
+	\item Find the first value of autocorrelation function $\rho_1$.
+	\item Find the partial autocorrelation function of this process. Explain the meaning of $\phi_{22}$.
+	\item What is the relationship between values of autocorrelation function $\rho_{100}$, $\rho_{99}$ and $\rho_{98}$.
+\end{enumerate}
+
+Hint: values $\phi_{22}$, $\phi_{33}$ etc may be calculated almost effortlessly :)
+
+\item Consider iid sample from bivariate normal distribution, 
+$
+\begin{pmatrix}
+	X_i \\
+	Y_i \\
+\end{pmatrix}	 \sim \cN \left(     
+\begin{pmatrix}
+	\theta \\
+	2\theta \\
+\end{pmatrix}; 
+\begin{pmatrix}
+	4 & 1 \\
+	1 & 9 \\
+\end{pmatrix}
+\right).
+$
+
+Calculate Fischer information for the following cases: 
+\begin{enumerate}
+	\item You observe $X_1$ only. 
+	\item You observe $X_1$, \ldots, $X_n$.
+	\item You observe $X_1$, \ldots, $X_n$, $Y_1$, \ldots, $Y_n$.
+\end{enumerate}
+
+Hint: the multivariate normal density is 
+$
+f(u) = \frac{1}{\sqrt{\det(2\pi \Sigma)}} \exp( -\frac{1}{2}(u-\mu)^T \Sigma^{-1}(u-\mu)).
+$
+
+\item Random variables $X_1$, \ldots, $X_n$ are independent with density 
+$
+f(x) = \begin{cases}
+	-\ln(a) \cdot a^x, \text{ if } x\geq 0, \\
+	0, \text{ otherwise.}
+\end{cases}	
+$
+\begin{enumerate}
+	\item Estimate $a$ using maximum likelihood. 
+	\item Check whether the estimator is unbiased and consistent. 
+	\item Check whether the corresponding Cramer-Rao lower bound is attained. 
+\end{enumerate}
+
+% \newpage
+\item Consider the $ARCH(1)$ model, $u_t = \sigma_t \nu_t$, where $\nu_t$ are iid $\cN(0;1)$ and 
+$\sigma^2_t = 1 + 0.3 u_{t-1}^2$. 
+\begin{enumerate}
+	\item Find 95\% predictive interval for $u_{101}$ if $u_{100} = -2$.
+	\item Find the autocorrelation function of $r_t = u_t^2$. 
+\end{enumerate}
+
+%\item Random variables $x_t$ are iid with $\P(x_t = 0) = \P(x_t = 1) = 0.5$. 
+%Consider the process $r_t = x_t \cdot x_{t-1} - 0.25$.
+%\begin{enumerate}
+%	\item Is $(r_t)$ stationary?
+%	\item Elon Musk promise that this is $MA(1)$ that can be rewritten as $r_t = u_t + \alpha u_{t-1}$.
+	
+%	Is Elon Musk right? If yes, then express $u_t$ using $x_t$ and its lagged values. 
+%\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}
