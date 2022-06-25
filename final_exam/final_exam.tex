@@ -1,0 +1,192 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+\usepackage{physics}
+
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Time Series and Stochastic Processes}
+\chead{DON'T PANIC}
+\rhead{Final Exam, 2022-06-25}
+\lfoot{2021-2022}
+\cfoot{120 minutes, one A4 cheat sheet allowed}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{english}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+%\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+%\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator{\pCorr}{\mathrm{p}\mathbb{C}\mathrm{orr}}
+
+
+\newcommand \hb{\hat{\beta}}
+\newcommand \hs{\hat{\sigma}}
+\newcommand \htheta{\hat{\theta}}
+\newcommand \s{\sigma}
+\newcommand \hy{\hat{y}}
+\newcommand \hY{\hat{Y}}
+\newcommand \e{\varepsilon}
+\newcommand \he{\hat{\e}}
+\newcommand \z{z}
+\newcommand \hVar{\widehat{\Var}}
+\newcommand \hCorr{\widehat{\Corr}}
+\newcommand \hCov{\widehat{\Cov}}
+\newcommand \cN{\mathcal{N}}
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cH}{\mathcal{H}}
+
+
+\begin{document}
+
+% \textbf{Start exam by writing the following honor pledge and signing it.}
+% \vspace{10pt}
+% \begin{tcolorbox}
+% I pledge on my honor that I will not give nor receive any 
+% unauthorized assistance on this exam.
+% \end{tcolorbox}
+% \vspace{20pt}
+
+% \textbf{Problems:}
+
+\begin{enumerate}
+
+\item Consider $ETS(ANN)$ model,
+	$
+	\begin{cases}
+	y_t = \ell_{t-1} + u_t \\
+	\ell_t = \ell_{t-1} + \alpha u_t \\
+	u_t \sim \cN(0;\sigma^2). \\
+	\end{cases}
+	$
+Let $\ell_{99} = 50$, $\alpha = 1/2$, $\sigma^2 = 16$, $y_{98} = 48$, $y_{99} = 52$, $y_{100} = 55$. Calculate 95\% predictive interval for $y_{101}$.
+
+\item Young investor Winnie-the-Crypto compares two trading strategies: buying bitcoins from good bees and from bad bees. 
+Let $d_t$ be the price difference at day $t$ (bad minus good). 
+Winnie-the-Crypto would like to test $H_0$: $\E(d_t) = 0$ against $H_a$: $\E(d_t) \neq 0$ at $5\%$ significance level.
+
+Winnie assumed that $(d_t)$ can be approximated by a $MA(1)$ process and estimated the parameters using $T=400$ observations, $\hat d_t = 2 + u_t + 0.7 u_{t-1}$ 
+with $\hat\sigma^2_u = 4$.
+
+\begin{enumerate}
+	\item Estimate $\E(d_t)$, $\Var(d_t)$ and $\Cov(d_t, d_{t-1})$.
+	\item Estimate $\E(\bar d)$, $\Var(\bar d)$ and help Winnie by considering $Z = \frac{\bar d - 0}{se(\bar d)}$.
+\end{enumerate}
+
+
+
+\item The variables $X_1$, \ldots, $X_n$ are independent and uniformly distributed on $[0; 2a]$ for some positive $a$. 
+
+\begin{enumerate}
+	\item Find any sufficient statistic for $a$. 
+	\item How the answer will change if $X_i \sim U[-a; 2a]$?
+\end{enumerate}
+
+% \newpage
+\item Consider an estimator $\hat a$ with $\E(\hat a) = 0.5a + 3$. For the given sample size the Fisher information is $I_F(a) = 400/a^2$.
+\begin{enumerate}
+	\item What is the theoretical minimal variance of $\hat a$?
+	\item Assume that $\hat a$ attains the minimal variance boundary and is asymptotically normal. Given that $\hat a = 2022$ provide 95\% CI for $a$.
+\end{enumerate}
+
+\item You observe $X_1$, \ldots, $X_{400}$ and $Y_1$, \ldots, $Y_{400}$, $\bar X = 5$, $\bar Y = 6$. 
+All variables are independent. 
+
+Consider the null hypothesis that all random variables are exponentially distributed with common parameter $\lambda$ against alternative
+that parameter is $\lambda_X$ for every $X_i$ and $\lambda_Y$ for every $Y_j$. 
+
+\begin{enumerate}
+	\item Estimate common $\lambda$ using maximum likelihood for the restricted model. 
+	\item Estimate both $\lambda_X$ and $\lambda_Y$ using maximum likelihood in the unrestricted model. 
+	\item Use LR-test to test the null hyphotesis at 5\% significance level. 
+\end{enumerate}
+
+\item The ultimate goal of this exercise is to prove the good upper bound for tail probability of a normal distribution: 
+if $X\sim \cN(0; \sigma^2)$ then $\P(X > c) \leq \exp(-c^2/2\sigma^2)$.
+
+Here are the guiding hints (you free to use not use them): 
+
+\begin{enumerate}
+	\item State the MGF of $X$. You may derive it or simply write it if you remember.
+	\item Consider $Y = \exp(uX)$. Using Markov inequality provide the upper bound for $\P(Y > \exp(uc))$.
+	\item Prove that $\P(X > c) \leq MGF_X(u)\exp(-uc)$ for any $u$.
+	\item Find the value of $u$ that makes the upper bound as tight as possible. 
+\end{enumerate}
+
+
+\item (bonus) Draw good bees and bad bees selling crypto. Any funny statistics/math joke is also ok!
+
+\end{enumerate}
+
+\end{document}
